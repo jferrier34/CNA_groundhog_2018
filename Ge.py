@@ -2,83 +2,100 @@
 from math import *
 import sys
 
-def average(list):
-        int i = -1
-        float ret
+def average(listt):
+    i = 1
+    nb2 = 0
+    while (i < len(listt)):
+        tmp = listt[i] - listt[i - 1]
+        if (tmp > 0):
+            nb2 = nb2 + tmp
+        i = i + 1
+    return (nb2 / (len(listt) - 1))
 
-        while (list[++i]):
-                ret = ret + list[i]
-        ret = ret / i
-        return (ret)
+def evolution(listt):
+    tmp = 0
+    tmp = (100 * (listt[len(listt) - 1] - listt[0]) / listt[0])
+    return (tmp)
 
-def evolution():
-        int i = -1
-        float ret
-        float av = average(list)
-
-        while (list[++i]):
-                ret = ret + pow(list[i] - av, 2)
-                ret = ret / i
-                ret = sqrt(ret)
-                return (ret)
-
-def deviation(ground):
-        ground.BasicDeviation = sum([(x-ground.MovingAverage)**2 for x in.ground.FloatFile]) / len(ground.FloatFile)
-        ground.BasicDeviation = ground.BasicDeviation**0.5
-        
+def deviation(listt, nb):
+    tmp = 0
+    nb2 = 0
+    tmp2 = nb
+    tmp3 = nb
+    while (tmp2 < len(listt)):
+        tmp = tmp + listt[tmp2]
+        tmp2 = tmp2 + 1
+    tmp = tmp / (len(listt) - nb)
+    while (nb < len(listt)):
+        nb2 = nb2 + pow(listt[nb] - tmp, 2)
+        nb = nb + 1
+    nb2 = nb2 / (len(listt) - tmp3)
+    return (float(sqrt(nb2)))
 def check_alert():
-        exit (0)
+    exit(0)
 
 def error_check_user(user):
-        if (user == "STOP"):
-            exit (0)
+    if (user != "STOP"):
         try:
-                tmp = int(user)
+            float(user)
         except:
-                print("only number")
-                exit (84)
+            print("only number")
+            exit(84)
 
-def basics()
-        print("SYNOPSIS")
-        print("\t\t./groundhog period")
-        print("DESCRIPTION")
-        print("\n")
-        print("\tperiod\tthe number of days defining a period")
-        exit(0)
-
-
-def error_check()
-        try:
-                period = int(sys.argv[1])
-        except:
-                basics()
-                print("Bad args")
-                exit(84)
-        if (period <= 0):
-                print("only positif values")
-                exit (84)
-
+def disp_final(value, opt):
+    if (opt == 0):
+        print("g=nan       r=nan%"+"       s=nan")
+    elif (opt == 1):
+        print("g=nan       r=nan%"+"       s=%.2f" % (value[2]))
+    else:
+        print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]))
 
 def do_all():
-        period = sys.argv[1]
+    listt = []
+    i = 0
+    tmp = [-1, -1, -1]
+    period = int(sys.argv[1])
+    while (1):
+        if (len(listt) > period):
+            listt.pop(0)
         user = input()
         error_check_user(user)
-        while (user != "STOP"):
-                average()
-                evolution()
-                deviation()
-                check_alert()
-                user = input()
-                error_check_user(user)
+        listt.append(float(user))
+        if ((len(listt) == period)):
+            tmp[2] = deviation(listt, 0)
+            i = 1
+        if (len(listt) > period):
+            tmp[1] = evolution(listt)
+            tmp[0] = average(listt)
+            tmp[2] = deviation(listt, 1)
+            i = 2
+        disp_final(tmp, i)
+
+def error_check():
+    try:
+        period = float(sys.argv[1])
+    except:
+        help()
+        print("Wrong arguments")
+        exit(84)
+    if (period <= 0):
+        print("only positif number")
+        exit(84)
+
+def help():
+    print("SYNOPSIS")
+    print("\t\t./groundhog period")
+    print("DESCRIPTION")
+    print("\tperiod\tthe number of days defining a period")
+    exit(0)
 
 def main():
-        if (len(sys.argv) < 2 && len(sys.argv) < 2):
-                exit (84)
-        if (sys.argv[1] == "-h"):
-                basics()
-        if (period <= 0)
-                exit (84)
-        error_check()
-        do_all()
+    if (len(sys.argv) < 2 and len(sys.argv) > 2):
+        exit(84)
+    if (sys.argv[1] == "-h"):
+        help()
+    error_check()
+    do_all()
 
-main()
+if __name__ == "__main__":
+    main()
