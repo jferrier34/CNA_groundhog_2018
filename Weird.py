@@ -46,11 +46,3 @@ def getWeird(list, weirdValue, weirdGap)
         }
     }
 }
-
-main()
-{
-    list = [1 , 2 , 3];
-    weirdValue = [list[1]];
-    weirdGap = [0, 0, 0, 0, 0];
-    getWeird(list);
-}
