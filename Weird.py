@@ -4,45 +4,20 @@
 ## File description:
 ## Weird
 ##
+#!/usr/bin/python3
 from math import *
 import sys
 
-def getWeird(list, weirdValue, weirdGap)
-{
-    int i = -1;
-    int y;
-    float tmp1;
-    float tmp2;
-    float val1;
-    float val2;
-    gap = list[-1] - list[-2];
-    if (weirdValue.length < 5 && weirdValue.length > 1) {
-        list.append(list.last);
-    }
-    else {
-        while (weirdGap[++i]) {
-            if (weirdGap[i] < gap) {
-                tmp1 = weirdGap[i];
-                val1 = weirdValue[i];
-                weirdGap[i] = gap;
-                weirdValue[i] = list[-1];
-                y = i;
-                while (y != 4) {
-                    if (tmp1 != weirdGap[y] && y < 4) {
-                        tmp2 = weirdGap[y];
-                        val2 = weirdValue[y];
-                        weirdGap[y] = tmp1;
-                        weirdValue[y] = val1;
-                        tmp1 = tmp2;
-                        val1 = val2;
-                    }
-                    if (y = 4 && tmp1 != weirdGap[y]) {
-                        weirdGap[y] = tmp1;
-                        weirdValue[y] = val1;
-                    }
-                y++;
-                }
-            }
-        }
-    }
-}
+def getWeird(list):
+    i = 0
+    weirdValues = []
+    while (i < len(list) + 1):
+        if (abs(list[i] / list[i + 1]) >= 0.1):
+            weirdValues.append(list[i])
+    i = 1
+    print("%2f%% weirdest values are [%2f%%" % (len(weirdValues)))
+    print("%2f%%" % weirdValues[0])
+    while (i < len(weirdValues)):
+        print(", ")
+        print("%2f%%" % weirdValues[i])
+    print("]\n")
