@@ -4,7 +4,6 @@ import sys
 
 def getWeird(list, listt):
     i = 0
-    print("ok")
     weirdValues = []
     while (i < len(list) - 1):
         if (abs(list[i] - list[i + 1]) >= 12):
