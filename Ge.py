@@ -2,25 +2,25 @@
 from math import *
 import sys
 
-def getWeird(list):
+def getWeird(list, listt):
     i = 0
+    print("ok")
     weirdValues = []
-    while (i < len(list) + 1):
+    while (i < len(list) - 1):
         if (abs(list[i] - list[i + 1]) >= 12):
-            weirdValues.append(list[i])
+            weirdValues.append(listt[i])
+        i += 1
     i = 1
-    print("%2f%% weirdest values are [%2f%%" % (len(weirdValues)))
-    print("%2f%%" % weirdValues[0])
-    while (i < len(weirdValues)):
-        print(", ")
-        print("%2f%%" % weirdValues[i])
-    print("]\n")
+    print("%d weirdest values are " % (len(weirdValues)), end = '')
+    print(weirdValues)
 
 def switch(evol1, evol2):
-    if (evol1 >= 0 and evol2 < 0):
-        print("\t a switch occurs\n")
-    if (evol1 < 0 and evol2 >= 0):
-        print("\t a switch occurs\n")
+    if (evol2 != 0):
+        if (evol1 >= 0 and evol2 < 0):
+            print("\t a switch occurs", end = '')
+        if (evol1 < 0 and evol2 >= 0):
+            print("\t a switch occurs", end = '')
+    print("")
 
 def average(listt):
     i = 1
@@ -64,16 +64,17 @@ def error_check_user(user):
 
 def disp_final(value, opt, retain):
     if (opt == 0):
-        print("g=nan       r=nan%"+"       s=nan")
+        print("g=nan       r=nan%"+"       s=nan", end = '')
     elif (opt == 1):
-        print("g=nan       r=nan%"+"       s=%.2f" % (value[2]))
+        print("g=nan       r=nan%"+"       s=%.2f" % (value[2]), end = '')
     else:
-        print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]))
+        print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]), end = '')
     switch(value[1], retain)
 
-def do_all(makeweird):
+def do_all():
     listt = []
     i = 0
+    makeweird = []
     tmp = [-1, -1, -1]
     period = int(sys.argv[1])
     retain = 0
@@ -81,6 +82,10 @@ def do_all(makeweird):
         if (len(listt) > period):
             listt.pop(0)
         user = input()
+        if (user == "STOP"):
+            print (listt)
+            getWeird(makeweird, listt)
+            exit(0)
         error_check_user(user)
         listt.append(float(user))
         if ((len(listt) == period)):
@@ -114,14 +119,12 @@ def help():
     exit(0)
 
 def main():
-    makeweird = []
     if (len(sys.argv) < 2 and len(sys.argv) > 2):
         exit(84)
     if (sys.argv[1] == "-h"):
         help()
     error_check()
-    do_all(makeweird)
-    getWeird(makeweird)
+    do_all()
 
 if __name__ == "__main__":
     main()
