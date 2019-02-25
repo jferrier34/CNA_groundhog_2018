@@ -2,6 +2,26 @@
 from math import *
 import sys
 
+def getWeird(list):
+    i = 0
+    weirdValues = []
+    while (i < len(list) + 1):
+        if (abs(list[i] - list[i + 1]) >= 12):
+            weirdValues.append(list[i])
+    i = 1
+    print("%2f%% weirdest values are [%2f%%" % (len(weirdValues)))
+    print("%2f%%" % weirdValues[0])
+    while (i < len(weirdValues)):
+        print(", ")
+        print("%2f%%" % weirdValues[i])
+    print("]\n")
+
+def switch(evol1, evol2):
+    if (evol1 >= 0 and evol2 < 0):
+        print("\t a switch occurs\n")
+    if (evol1 < 0 and evol2 >= 0):
+        print("\t a switch occurs\n")
+
 def average(listt):
     i = 1
     nb2 = 0
@@ -42,19 +62,21 @@ def error_check_user(user):
             print("only number")
             exit(84)
 
-def disp_final(value, opt):
+def disp_final(value, opt, retain):
     if (opt == 0):
         print("g=nan       r=nan%"+"       s=nan")
     elif (opt == 1):
         print("g=nan       r=nan%"+"       s=%.2f" % (value[2]))
     else:
         print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]))
+    switch(value[1], retain)
 
-def do_all():
+def do_all(makeweird):
     listt = []
     i = 0
     tmp = [-1, -1, -1]
     period = int(sys.argv[1])
+    retain = 0
     while (1):
         if (len(listt) > period):
             listt.pop(0)
@@ -65,11 +87,13 @@ def do_all():
             tmp[2] = deviation(listt, 0)
             i = 1
         if (len(listt) > period):
+            retain = tmp[1]
             tmp[1] = evolution(listt)
             tmp[0] = average(listt)
             tmp[2] = deviation(listt, 1)
             i = 2
-        disp_final(tmp, i)
+            makeweird.append(tmp[1])
+        disp_final(tmp, i, retain)
 
 def error_check():
     try:
@@ -90,12 +114,14 @@ def help():
     exit(0)
 
 def main():
+    makeweird = []
     if (len(sys.argv) < 2 and len(sys.argv) > 2):
         exit(84)
     if (sys.argv[1] == "-h"):
         help()
     error_check()
-    do_all()
+    do_all(makeweird)
+    getWeird(makeweird)
 
 if __name__ == "__main__":
     main()

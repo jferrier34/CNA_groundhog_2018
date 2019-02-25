@@ -12,7 +12,7 @@ def getWeird(list):
     i = 0
     weirdValues = []
     while (i < len(list) + 1):
-        if (abs(list[i] / list[i + 1]) >= 0.1):
+        if (abs(list[i] - list[i + 1]) >= 12):
             weirdValues.append(list[i])
     i = 1
     print("%2f%% weirdest values are [%2f%%" % (len(weirdValues)))
