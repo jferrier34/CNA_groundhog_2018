@@ -19,7 +19,6 @@ def switch(evol1, evol2):
             print("\t a switch occurs", end = '')
         if (evol1 < 0 and evol2 >= 0):
             print("\t a switch occurs", end = '')
-    print("")
 
 def average(listt):
     i = 1
@@ -73,6 +72,7 @@ def disp_final(value, opt, retain):
     if (tmp == 1):
         switch(value[1], retain)
         tmp = 0
+    print("")
 
 def do_all():
     listt = []
