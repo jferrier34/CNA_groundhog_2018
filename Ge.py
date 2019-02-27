@@ -19,7 +19,6 @@ def switch(evol1, evol2):
             print("\t a switch occurs", end = '')
         if (evol1 < 0 and evol2 >= 0):
             print("\t a switch occurs", end = '')
-    print("")
 
 def average(listt):
     i = 1
