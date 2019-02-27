@@ -62,13 +62,17 @@ def error_check_user(user):
             exit(84)
 
 def disp_final(value, opt, retain):
+    tmp = 0
     if (opt == 0):
         print("g=nan       r=nan%"+"       s=nan", end = '')
     elif (opt == 1):
         print("g=nan       r=nan%"+"       s=%.2f" % (value[2]), end = '')
     else:
+        tmp = 1
         print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]), end = '')
-    switch(value[1], retain)
+    if (tmp == 1):
+        switch(value[1], retain)
+        tmp = 0
 
 def do_all():
     listt = []
