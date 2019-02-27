@@ -19,6 +19,7 @@ def switch(evol1, evol2):
             print("\t a switch occurs", end = '')
         if (evol1 < 0 and evol2 >= 0):
             print("\t a switch occurs", end = '')
+    print("")
 
 def average(listt):
     i = 1
@@ -60,18 +61,15 @@ def error_check_user(user):
             print("only number")
             exit(84)
 
-def disp_final(value, opt, retain):
-    tmp = 0
+def disp_final(value, opt, retain, tmp2):
     if (opt == 0):
         print("g=nan       r=nan%"+"       s=nan", end = '')
     elif (opt == 1):
         print("g=nan       r=nan%"+"       s=%.2f" % (value[2]), end = '')
     else:
-        tmp = 1
         print("g=%.2f       r=%.2f%%       s=%.2f" % (value[0], value[1], value[2]), end = '')
-    if (tmp == 1):
+    if (tmp2 > int(sys.argv[1])):
         switch(value[1], retain)
-        tmp = 0
     print("")
 
 def do_all():
@@ -79,6 +77,7 @@ def do_all():
     i = 0
     makeweird = []
     tmp = [-1, -1, -1]
+    tmp2 = 0
     period = int(sys.argv[1])
     retain = 0
     while (1):
@@ -101,7 +100,8 @@ def do_all():
             tmp[2] = deviation(listt, 1)
             i = 2
             makeweird.append(tmp[1])
-        disp_final(tmp, i, retain)
+        disp_final(tmp, i, retain, tmp2)
+        tmp2 = tmp2 + 1
 
 def error_check():
     try:
