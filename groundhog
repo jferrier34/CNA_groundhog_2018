@@ -115,9 +115,9 @@ def error_check():
 
 def help():
     print("SYNOPSIS")
-    print("\t\t./groundhog period")
+    print("\t./groundhog period")
     print("DESCRIPTION")
-    print("\tperiod\tthe number of days defining a period")
+    print("\tperiod\t\tthe number of days defining a period")
     exit(0)
 
 def main():
