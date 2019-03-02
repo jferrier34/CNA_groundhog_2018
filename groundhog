@@ -84,6 +84,7 @@ def do_all():
             listt.pop(0)
         user = input()
         if (user == "STOP" and (len(listt) < period)):
+            print("you have leave the programm")
             exit (84)
         if (user == "STOP"):
             print (listt)
@@ -112,7 +113,7 @@ def error_check():
         print("Wrong arguments")
         exit(84)
     if (period <= 0):
-        print("only positif number")
+        print("please enter a non negative numbers")
         exit(84)
 
 def help():
@@ -124,10 +125,12 @@ def help():
 
 def main():
     if (len(sys.argv) == 1):
-        exit (0)
+        print("please enter an argument")
+        exit (84)
     if (len(sys.argv) < 2 and len(sys.argv) > 2):
         exit (84)
     if (sys.argv[1].isalpha()):
+        print ("please retry")
         exit (84)
     if (sys.argv[1] == "-h"):
         help()
