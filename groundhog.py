@@ -85,7 +85,7 @@ def call_all(user, weird, copy_weird, tmp, period, tmp2, retain, i, tab, nb_swit
         tmp[2] = deviation(tab, 1)
         i = 2
     nb_switch = disp(tmp, i, retain, tmp2, nb_switch)
-    print(tmp2)
+    #print(tmp2)
 
 
 def princip():
