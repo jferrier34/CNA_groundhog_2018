@@ -55,7 +55,7 @@ def disp(value, opt, retain, tmp2, nb_switch):
     elif (opt == 1):
         print("g=nan       r=nan%"+"       s=%.2f" % (value[2]), end = '')
     else:
-        print("g=%.2f       r=%.0f       s=%.2f" % (value[0], value[1], value[2]), end = '')
+        print("g=%.2f       r=%.0f%%       s=%.2f" % (value[0], value[1], value[2]), end = '')
     if (tmp2 > int(sys.argv[1])):
         nb_switch = switch(value[1], retain, nb_switch)
     print("")
