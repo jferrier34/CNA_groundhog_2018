@@ -3,7 +3,7 @@
 from math import *
 import sys
 
-def switch(evol1, evol2, nb_switch):
+def switch(evol1, evol2, nb_switch): #this function permit to display "a switch occurs when you have a variances between 2 values of r"
     if (evol2 != 0):
         if (evol1 >= 0 and evol2 < 0):
             nb_switch += 1
@@ -63,29 +63,28 @@ def disp(value, opt, retain, tmp2, nb_switch):
 
 def check_general_error(tab, period, user, weird, copy_weird, nb_switch):
 
-    if (user == "STOP" and (len(tab) < period)):
+    if (user == "STOP" and (len(tab) < period)): #if user write STOP and the numbers of values into the tab is inferior of the number of day in the period 
         print("you have leave the programm")
         exit (84)
-    if (user == "STOP"):
+    if (user == "STOP"): #if user write STOP we leave the program
         exit(0)
     try:
         float(user)
     except:
-        print("only number")
+        print("only number") #if user write a value who is not a digit
         exit(84)
 
 def call_all(user, weird, copy_weird, tmp, period, tmp2, retain, i, tab, nb_switch):
-    if ((len(tab) == period)):
+    if ((len(tab) == period)): 
         tmp[2] = deviation(tab, 0)
         i = 1
-    if (len(tab) > period):
+    if (len(tab) > period): 
         retain = tmp[1]
         tmp[1] = evolution(tab)
         tmp[0] = average(tab)
         tmp[2] = deviation(tab, 1)
         i = 2
     nb_switch = disp(tmp, i, retain, tmp2, nb_switch)
-    #print(tmp2)
 
 
 def princip():
@@ -99,7 +98,7 @@ def princip():
     copy_weird = []
     weird = []
     while (1):
-        if (len(tab) > period):
+        if (len(tab) > period): 
             tab.pop(0)
         try:
             user = input()
@@ -112,35 +111,36 @@ def princip():
 
 def error_check():
     try:
-        period = float(sys.argv[1])
+        period = float(sys.argv[1]) #period check correspond a value to represent a interval of days experimentation
     except:
         help()
         print("Wrong arguments")
         exit(84)
-    if (period <= 0):
+    if (period <= 0): #the value of the period correspond obviously a positive number
         print("please enter a non negative numbers")
         exit(84)
 
-def help():
+def help(): #display of -h to explain the goal of project
     print("SYNOPSIS")
     print("\t./groundhog period")
     print("DESCRIPTION")
     print("\tperiod\t\tthe number of days defining a period")
     exit(0)
 
+#this main manage errors of many possibilities arguments
 def main():
-    if (len(sys.argv) == 1):
+    if (len(sys.argv) == 1): #if the the user enter any argument (only exec)
         print("please enter an argument")
         exit (84)
-    if (len(sys.argv) < 2 and len(sys.argv) > 2):
+    if (len(sys.argv) < 2 and len(sys.argv) > 2): #if no argument or the user enter more of 2 arguments (ex ./groundhog 2 4)
         exit (84)
-    if (sys.argv[1].isalpha()):
+    if (sys.argv[1].isalpha()): #if the user enter a non digit argument
         print ("please retry")
         exit (84)
-    if (sys.argv[1] == "-h"):
+    if (sys.argv[1] == "-h"): #if user enter "-h" after the exec (ex ./groundhog -h)
         help()
-    error_check()
-    princip()
+    error_check() #call error_check function
+    princip() #call de princip function
 
 if __name__ == "__main__":
     main()
